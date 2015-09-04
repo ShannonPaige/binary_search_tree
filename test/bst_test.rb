@@ -40,4 +40,8 @@ class BSTTest < MiniTest::Test
     refute @new_list.include?("s")
   end
 
+  def test_find_the_maximum_value_in_the_tree_when_its_empty
+    assert_equal nil, @new_list.maximum
+  end
+
 end
