@@ -44,4 +44,22 @@ class BSTTest < MiniTest::Test
     assert_equal nil, @new_list.maximum
   end
 
+  def test_find_the_maximum_value_in_the_tree
+    @new_list.insert("d")
+    @new_list.insert("b")
+    @new_list.insert("f")
+    assert_equal "f", @new_list.maximum
+  end
+
+  def test_find_the_minimum_value_in_the_tree_when_its_empty
+    assert_equal nil, @new_list.minimum
+  end
+
+  def test_find_the_minimum_value_in_the_tree
+    @new_list.insert("d")
+    @new_list.insert("b")
+    @new_list.insert("f")
+    assert_equal "b", @new_list.minimum
+  end
+
 end

@@ -58,19 +58,29 @@ class BST
   def maximum(here = @head)
     # find the maximum value in the tree
     if bst_empty?
-      max = nil
+      return nil
     else
-      if here.left == NullNode::DEFAULT
+      if here.right == NullNode::DEFAULT
         return here.data
       else
-        here = here.left
+        here = here.right
         maximum(here)
       end
     end
   end
 
-  def minimum
+  def minimum(here = @head)
     # find the minimum value in the tree
+    if bst_empty?
+      return nil
+    else
+      if here.left == NullNode::DEFAULT
+        return here.data
+      else
+        here = here.left
+        minimum(here)
+      end
+    end
   end
 
   def sort
