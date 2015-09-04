@@ -32,4 +32,12 @@ class BSTTest < MiniTest::Test
     assert_equal "g", @new_list.head.right.right.data
   end
 
+  def test_include_verify_or_rejects_the_presence_of_a_value_in_the_tree
+    @new_list.insert("d")
+    @new_list.insert("f")
+    assert @new_list.include?("d")
+    assert @new_list.include?("f")
+    refute @new_list.include?("s")
+  end
+
 end
