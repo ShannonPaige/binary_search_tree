@@ -31,12 +31,28 @@ class BST
         insert(node_value, here)
       end
     end
-    self # => #<BST:0x007f9bd404ba38 @head=#<Node:0x007f9bd404b790 @data="d", @left=#<NullNode:0x007f9bd4050830>, @right=#<NullNode:0x007f9bd4050830>>>
+    self
   end
 
-  def include?
-    # verify/reject the presence of a value in the tree with include?
-  end
+  # def include?(value, here = @head)
+  #   if bst_empty? # => false
+  #     include = false
+  #   else
+  #     if here.data == value # => true
+  #       value # => "d"
+  #       include = true # => true
+  #       include # => true
+  #       return # =>
+  #     # elsif here.data < value
+  #     #   here = here.right
+  #     #   include?(value, here)
+  #     # else
+  #     #   here = here.left
+  #     #   include?(value, here)
+  #     end # =>
+  #   end # =>
+  #   include # =>
+  # end
 
   def depth_of
     # report the depth of a node in the tree with depth_of
@@ -67,13 +83,14 @@ class BST
   end
 end
 
-tree = BST.new # => #<BST:0x007f9bd404ba38 @head=#<NullNode:0x007f9bd4050830>>
-tree.insert("d") # => #<BST:0x007f9bd404ba38 @head=#<Node:0x007f9bd404b790 @data="d", @left=#<NullNode:0x007f9bd4050830>, @right=#<NullNode:0x007f9bd4050830>>>
+tree = BST.new
+tree.insert("d")
 # tree.insert("b") # => nil
 # tree.insert("a")
 # tree.insert("c") # => #<BST:0x007fe0118429e0 @head=#<Node:0x007fe011842760 @data="d", @left=#<Node:0x007fe011842120 @data="b", @left=#<Node:0x007fe011841ec8 @data="a", @left=#<NullNode:0x007fe0118433b8>, @right=#<NullNode:0x007fe0118433b8>>, @right=#<Node:0x007fe011841a18 @data="c", @left=#<NullNode:0x007fe0118433b8>, @right=#<NullNode:0x007fe0118433b8>>>, @right=#<NullNode:0x007fe0118433b8>>>
 # tree.insert("f")
 # tree.insert("e")
 # tree.insert("g")
-tree # => #<BST:0x007f9bd404ba38 @head=#<Node:0x007f9bd404b790 @data="d", @left=#<NullNode:0x007f9bd4050830>, @right=#<NullNode:0x007f9bd4050830>>>
-tree.head.data # => "d"
+tree # => #<BST:0x007fd584830070 @head=#<Node:0x007fd584830020 @data="d", @left=#<NullNode:0x007fd584830b60>, @right=#<NullNode:0x007fd584830b60>>>
+tree.head.data
+tree.include?("d") # => nil
