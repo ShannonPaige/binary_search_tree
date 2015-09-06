@@ -71,6 +71,17 @@ class BSTTest < MiniTest::Test
     assert_equal "b", @new_list.minimum
   end
 
+  def test_return_array_of_the_values_in_sorted_order
+    @new_list.insert("d")
+    @new_list.insert("b")
+    @new_list.insert("a")
+    @new_list.insert("c")
+    @new_list.insert("f")
+    @new_list.insert("e")
+    @new_list.insert("g")
+    assert_equal ["a", "b", "c", "d", "e", "f", "g"], @new_list.sort
+  end
+
   def test_return_height_of_tree_as_zero_if_empty
     skip
     # assert_equal 0, @new_list.height
