@@ -40,6 +40,15 @@ class BSTTest < MiniTest::Test
     refute @new_list.include?("s")
   end
 
+  def test_return_depth_of_given_node_value
+    @new_list.insert("d")
+    @new_list.insert("b")
+    @new_list.insert("a")
+    assert_equal 0, @new_list.depth_of("d")
+    assert_equal 1, @new_list.depth_of("b")
+    assert_equal 2, @new_list.depth_of("a")
+  end
+
   def test_find_the_maximum_value_in_the_tree_when_its_empty
     assert_equal nil, @new_list.maximum
   end
@@ -60,6 +69,25 @@ class BSTTest < MiniTest::Test
     @new_list.insert("b")
     @new_list.insert("f")
     assert_equal "b", @new_list.minimum
+  end
+
+  def test_return_height_of_tree_as_zero_if_empty
+    skip
+    # assert_equal 0, @new_list.height
+  end
+
+  def test_return_height_of_tree_as_zero_if_just_has_one_node
+    skip
+    # @new_list.insert("d")
+    # assert_equal 0, @new_list.height
+  end
+
+  def test_return_height_of_tree
+    skip
+    # @new_list.insert("d")
+    # @new_list.insert("b")
+    # @new_list.insert("a")
+    # assert_equal 2, @new_list.height
   end
 
 end
