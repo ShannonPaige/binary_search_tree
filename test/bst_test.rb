@@ -5,9 +5,9 @@ class BSTTest < MiniTest::Test
 
   def setup
     @new_list = BST.new
-    @new_list2 = BST.new
-    @new_node = Node.new(:node_data)
-    @new_node2 = Node.new(:node2_data)
+    # @new_list2 = BST.new
+    # @new_node = Node.new(:node_data)
+    # @new_node2 = Node.new(:node2_data)
   end
 
   def test_insert_method_adds_a_node_to_the_head_of_an_empty_binary_tree
@@ -142,19 +142,11 @@ class BSTTest < MiniTest::Test
     assert_equal "b", @new_list.head.data
   end
 
-  def test_number_of_children
-    skip
-  end
-
-  def test_replace
-    skip
-  end
-
-  def test_file_open
-    skip
-  end
-
-  def test_file_output
-        skip
+  def test_returns_the_children_type_of_a_node
+    @new_list.insert("d")
+    @new_list.insert("b")
+    @new_list.insert("f")
+    here = @new_list.head
+    assert_equal "Both", @new_list.children_type(here)
   end
 end

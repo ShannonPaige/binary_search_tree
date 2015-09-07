@@ -99,7 +99,7 @@ class BST
       elsif here.data > value
         delete(value, here.left, here)
       else
-        children = number_of_children(here)
+        children = children_type(here)
         case children
         when 'Both'
           two_child_replace(here)
@@ -111,11 +111,10 @@ class BST
           no_children_replace(here, mother)
         end
       end
-    end
-    #here.data                                                      # => "g", "f", "d"
+    end                                                      # => "g", "f", "d"
   end
 
-  def number_of_children(here)
+  def children_type(here)
     if here.left != NullNode::DEFAULT && here.right != NullNode::DEFAULT
       'Both'
     elsif here.left != NullNode::DEFAULT
