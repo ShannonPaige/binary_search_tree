@@ -82,23 +82,20 @@ class BSTTest < MiniTest::Test
     assert_equal ["a", "b", "c", "d", "e", "f", "g"], @new_list.sort
   end
 
-  def test_return_height_of_tree_as_zero_if_empty
-    skip
-    # assert_equal 0, @new_list.height
+  def test_return_height_of_tree_as_negative_one_if_empty
+    assert_equal -1, @new_list.height
   end
 
   def test_return_height_of_tree_as_zero_if_just_has_one_node
-    skip
-    # @new_list.insert("d")
-    # assert_equal 0, @new_list.height
+    @new_list.insert("d")
+    assert_equal 0, @new_list.height
   end
 
   def test_return_height_of_tree
-    skip
-    # @new_list.insert("d")
-    # @new_list.insert("b")
-    # @new_list.insert("a")
-    # assert_equal 2, @new_list.height
+    @new_list.insert("d")
+    @new_list.insert("b")
+    @new_list.insert("a")
+    assert_equal 2, @new_list.height
   end
 
 end

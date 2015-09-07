@@ -1,13 +1,13 @@
-require_relative "node"
-require_relative "null_node"
+require_relative "node"       # => true
+require_relative "null_node"  # => false
 
 class BST
-  attr_accessor :head, :array
+  attr_accessor :head, :array  # => nil
 
   def initialize(head = NullNode::DEFAULT)
-    @head = head
-    @sorted_array = []
-  end
+    @head = head                            # => #<NullNode:0x007ff52c0e2e68>
+    @sorted_array = []                      # => []
+  end                                       # => :initialize
 
   def insert(node_value, here = @head)
     if @head == NullNode::DEFAULT
@@ -27,7 +27,7 @@ class BST
       end
     end
     self
-  end
+  end                                                                     # => :insert
 
   def include?(value, here = @head)
     if here == NullNode::DEFAULT
@@ -41,10 +41,12 @@ class BST
       here = here.left
       include?(value, here)
     end
-  end
+  end                                # => :include?
 
   def depth_of(value, here = @head, counter = 0)
-    if value == here.data
+    if @head == NullNode::DEFAULT
+      return -1
+    elsif value == here.data
       return counter
     elsif value < here.data
       here = here.left
@@ -55,7 +57,7 @@ class BST
       counter += 1
       depth_of(value, here, counter)
     end
-  end
+  end                                             # => :depth_of
 
   def maximum(here = @head)
     if @head == NullNode::DEFAULT
@@ -68,7 +70,7 @@ class BST
         maximum(here)
       end
     end
-  end
+  end                                     # => :maximum
 
   def minimum(here = @head)
     if @head == NullNode::DEFAULT
@@ -81,7 +83,7 @@ class BST
         minimum(here)
       end
     end
-  end
+  end                                    # => :minimum
 
   # def sort(here = @head, sorted_array = @sorted_array)
   #   if here == NullNode::DEFAULT                        # => false, false, false, true, true, true, false, true
@@ -104,46 +106,76 @@ class BST
 
 
   def sort(here = @head, mother = @head, sorted_array = @sorted_array)
-    if here == NullNode::DEFAULT
+    if here == NullNode::DEFAULT                                        # => true
       return
     else
-      sort(here.left, mother)
+      sort(here.left, here)
       sorted_array << here.data
-      sort(here.right, mother)
+      sort(here.right, here)
     end
     sorted_array
-  end
+  end                                                                   # => :sort
 
-  def delete
-    # As the final challenge, add the ability to delete a value from the tree and repair the tree.
-    # Ask a node to delete the node and return itslef.
-    # When you find the node have it return null node
-    # what to do about children?
-  end
+  # def delete(value, here = @head, mother = @head)
+  #   # As the final challenge, add the ability to delete a value from the tree and repair the tree.
+  #   # Ask a node to delete the node and return itslef.
+  #   # When you find the node have it return null node
+  #   # what to do about children?
+  #   if here == NullNode::DEFAULT
+  #     return
+  #   else
+  #     delete(value, here.left, here)
+  #     #when deleting a leaf
+  #     if here.data == value
+  #       if here.data < mother.data
+  #         mother.left = NullNode::DEFAULT
+  #         return
+  #       else
+  #         here.data
+  #         mother.data
+  #         mother.right.data
+  #         mother.right = NullNode::DEFAULT
+  #         return
+  #       end
+  #     end
+  #     delete(value, here.right, here)
+  #   end
+  #   self
+  # end                                              # => :delete
 
   def number_of_leaves
     # find the total number of leaves on the tree
     # Make counter to count a leaf
     # go through every node on the tree
     # when left and right are null, add to counter
-  end
+  end                   # => :number_of_leaves
 
   def height
-    # report the (maximum) height of the tree
-    # go through every node and get the depth. Find the max depth
-  end
-end
+    nodes = sort                   # => nil
+    depths = []                    # => []
+    nodes                          # => nil
+    if nodes.nil?                  # => true
+      return -1                     # => 0
+    else
+      nodes.each do |value|
+        value
+        depth_of(value)
+        depths << depth_of(value)
+      end
+      depths.sort.pop
+    end
+  end                              # => :height
+end                                # => :height
 
-tree = BST.new
-tree.insert("d")
-tree.insert("b")
-tree.insert("a")
-tree.insert("c")
-tree.insert("f")
-tree.insert("e")
-tree.insert("g")
-tree.insert("ab")
+tree = BST.new  # => #<BST:0x007ff52c0e0898 @head=#<NullNode:0x007ff52c0e2e68>, @sorted_array=[]>
+# tree.insert("d")
+# tree.insert("b")
+# tree.insert("a")
+# tree.insert("c")
+# tree.insert("f")
+# tree.insert("e")
+# tree.insert("g")
+# tree.insert("ab")
 
-tree
-tree.sort
-#tree.traverse
+tree         # => #<BST:0x007ff52c0e0898 @head=#<NullNode:0x007ff52c0e2e68>, @sorted_array=[]>
+tree.height  # => 0
