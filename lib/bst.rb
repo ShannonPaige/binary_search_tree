@@ -111,7 +111,7 @@ class BST
           no_children_replace(here, mother)
         end
       end
-    end                                                      # => "g", "f", "d"
+    end
   end
 
   def children_type(here)

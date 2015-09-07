@@ -5,9 +5,6 @@ class BSTTest < MiniTest::Test
 
   def setup
     @new_list = BST.new
-    # @new_list2 = BST.new
-    # @new_node = Node.new(:node_data)
-    # @new_node2 = Node.new(:node2_data)
   end
 
   def test_insert_method_adds_a_node_to_the_head_of_an_empty_binary_tree
