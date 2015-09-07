@@ -4,6 +4,4 @@ class NullNode
     @data = nil
   end
 
-  def delete(data)
-  end
 end

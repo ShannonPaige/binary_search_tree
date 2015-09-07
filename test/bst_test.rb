@@ -5,18 +5,19 @@ class BSTTest < MiniTest::Test
 
   def setup
     @new_list = BST.new
+    @new_list2 = BST.new
     @new_node = Node.new(:node_data)
     @new_node2 = Node.new(:node2_data)
   end
 
-  def test_insert_adds_a_node_to_the_head_of_an_empty_binary_tree
+  def test_insert_method_adds_a_node_to_the_head_of_an_empty_binary_tree
     @new_list.insert("d")
     assert_equal "d", @new_list.head.data
     assert_equal NullNode::DEFAULT, @new_list.head.left
     assert_equal NullNode::DEFAULT, @new_list.head.right
   end
 
-  def test_insert_adds_a_node_to_the_left_of_a_larger_node
+  def test_insert_method_adds_a_node_to_the_left_of_a_larger_node
     @new_list.insert("d")
     @new_list.insert("b")
     @new_list.insert("a")
@@ -24,7 +25,7 @@ class BSTTest < MiniTest::Test
     assert_equal "a", @new_list.head.left.left.data
   end
 
-  def test_insert_adds_a_node_to_the_right_of_a_smaller_node
+  def test_insert_method_adds_a_node_to_the_right_of_a_smaller_node
     @new_list.insert("d")
     @new_list.insert("f")
     @new_list.insert("g")
@@ -32,7 +33,7 @@ class BSTTest < MiniTest::Test
     assert_equal "g", @new_list.head.right.right.data
   end
 
-  def test_include_verify_or_rejects_the_presence_of_a_value_in_the_tree
+  def test_include_method_verifies_or_rejects_the_presence_of_a_value
     @new_list.insert("d")
     @new_list.insert("f")
     assert @new_list.include?("d")
@@ -40,7 +41,7 @@ class BSTTest < MiniTest::Test
     refute @new_list.include?("s")
   end
 
-  def test_return_depth_of_given_node_value
+  def test_depth_of_method_returns_depth_of_given_node_value
     @new_list.insert("d")
     @new_list.insert("b")
     @new_list.insert("a")
@@ -49,7 +50,7 @@ class BSTTest < MiniTest::Test
     assert_equal 2, @new_list.depth_of("a")
   end
 
-  def test_find_the_maximum_value_in_the_tree_when_its_empty
+  def test_maximum_value_of_an_empty_tree_is_nil
     assert_equal nil, @new_list.maximum
   end
 
@@ -60,7 +61,7 @@ class BSTTest < MiniTest::Test
     assert_equal "f", @new_list.maximum
   end
 
-  def test_find_the_minimum_value_in_the_tree_when_its_empty
+  def test_minimum_value_of_an_emoty_tree_is_nil
     assert_equal nil, @new_list.minimum
   end
 
@@ -82,16 +83,16 @@ class BSTTest < MiniTest::Test
     assert_equal ["a", "b", "c", "d", "e", "f", "g"], @new_list.sort
   end
 
-  def test_returns_0_number_of_leaves_on_an_empty_tree
+  def test_number_of_leaves_returns_0_on_a_tree_with_no_nodes
     assert_equal 0, @new_list.number_of_leaves
   end
 
-  def test_returns_number_of_leaves_on_an_tree
+  def test_returns_number_of_leaves_returns_1_on_a_tree_with_one_node
     @new_list.insert("d")
     assert_equal 1, @new_list.number_of_leaves
   end
 
-  def test_returns_number_of_leaves_on_an_tree
+  def test_number_of_leaves_returned_on_a_tree_with_multiple_nodes
     @new_list.insert("d")
     @new_list.insert("b")
     @new_list.insert("f")
@@ -107,11 +108,53 @@ class BSTTest < MiniTest::Test
     assert_equal 0, @new_list.height
   end
 
-  def test_return_height_of_tree
+  def test_return_height_of_tree_with_multiple_nodes
     @new_list.insert("d")
     @new_list.insert("b")
     @new_list.insert("a")
     assert_equal 2, @new_list.height
   end
 
+  def test_delete_a_node_with_no_children
+    @new_list.insert("d")
+    @new_list.insert("b")
+    @new_list.insert("f")
+    @new_list.delete("f")
+    refute @new_list.include?("f")
+    assert_equal NullNode::DEFAULT, @new_list.head.right
+  end
+
+  def test_delete_a_node_with_one_child
+    @new_list.insert("d")
+    @new_list.insert("b")
+    @new_list.insert("a")
+    @new_list.delete("b")
+    refute @new_list.include?("b")
+    assert_equal "a", @new_list.head.left.data
+  end
+
+  def test_delete_a_node_with_two_children
+    @new_list.insert("d")
+    @new_list.insert("b")
+    @new_list.insert("f")
+    @new_list.delete("d")
+    refute @new_list.include?("d")
+    assert_equal "b", @new_list.head.data
+  end
+
+  def test_number_of_children
+    skip
+  end
+
+  def test_replace
+    skip
+  end
+
+  def test_file_open
+    skip
+  end
+
+  def test_file_output
+        skip
+  end
 end

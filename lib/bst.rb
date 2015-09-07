@@ -1,32 +1,32 @@
-require_relative "node"       # => true
-require_relative "null_node"  # => false
+require_relative 'node'
+require_relative 'null_node'
 
 class BST
-  attr_accessor :head, :array  # => nil
+  attr_accessor :head, :array
 
   def initialize(head = NullNode::DEFAULT)
-    @head = head                            # => #<NullNode:0x007fef9a09b708>
-    @sorted_array = []                      # => []
-    @leaves = []                            # => []
-  end                                       # => :initialize
+    @head = head
+    @sorted_array = []
+    @leaves = []
+  end
 
   def insert(node_value, here = @head)
-    if @head == NullNode::DEFAULT                                         # => true, false, false, false, false, false, false, false, false, false, false
-      @head = Node.new(node_value)                                        # => #<Node:0x007fef9a098530 @data="d", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>
+    if @head == NullNode::DEFAULT
+      @head = Node.new(node_value)
     else
-      new_node = Node.new(node_value)                                     # => #<Node:0x007fef9a093530 @data="b", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a091dc0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a089c38 @data="c", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a088ec8 @data="c", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a081da8 @data="f", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a0801d8 @data="e", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a07bb60 @data="e", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a0782a8 @data="g", @left=#<Nul...
-      if new_node.data < here.data && here.left == NullNode::DEFAULT      # => true, false, true, false, false, false, false, true, false, false
-        here.left = new_node                                              # => #<Node:0x007fef9a093530 @data="b", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a07bb60 @data="e", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>
-      elsif new_node.data > here.data && here.right == NullNode::DEFAULT  # => false, false, true, true, false, false, true
-        here.right = new_node                                             # => #<Node:0x007fef9a088ec8 @data="c", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a081da8 @data="f", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a073c08 @data="g", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>
-      elsif new_node.data < here.data                                     # => true, true, false, false
-        insert(node_value, here.left)                                     # => #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>, @sorted_array=[], @leaves=[]>, #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<Node:0x007fef9a088ec8 @data="c", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>>, @right=#<NullNode:0x007fef9a09b708>>, @sorted_array=[], @leaves=[]>
+      new_node = Node.new(node_value)
+      if new_node.data < here.data && here.left == NullNode::DEFAULT
+        here.left = new_node
+      elsif new_node.data > here.data && here.right == NullNode::DEFAULT
+        here.right = new_node
+      elsif new_node.data < here.data
+        insert(node_value, here.left)
       else
-        insert(node_value, here.right)                                    # => #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<Node:0x007fef9a088ec8 @data="c", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>>, @right=#<Node:0x007fef9a081da8 @data="f", @left=#<Node:0x007fef9a07bb60 @data="e", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>>, @sorted_array=[], @leaves=[]>, #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<Node:0x007fef9a088ec8 @data="c", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>>, @right=#<Node:0x0...
-      end                                                                 # => #<Node:0x007fef9a093530 @data="b", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>, @sorted_array=[], @leaves=[]>, #<Node:0x007fef9a088ec8 @data="c", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<Node:0x007fef9a088ec8 @data="c", @l...
-    end                                                                   # => #<Node:0x007fef9a098530 @data="d", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a093530 @data="b", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>, @sorted_array=[], @leaves=[]>, #<Node:0x007fef9a088ec8 @data="c", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<N...
-    self                                                                  # => #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @sorted_array=[], @leaves=[]>, #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>, @sorted_array=[], @leaves=[]>, #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>, @sorted_array=[], @leaves=[]>, #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a0...
-  end                                                                     # => :insert
+        insert(node_value, here.right)
+      end
+    end
+    self
+  end
 
   def include?(value, here = @head)
     if here == NullNode::DEFAULT
@@ -38,7 +38,7 @@ class BST
     else
       include?(value, here.left)
     end
-  end                                # => :include?
+  end
 
   def depth_of(value, here = @head, counter = 0)
     if @head == NullNode::DEFAULT
@@ -52,7 +52,7 @@ class BST
       counter += 1
       depth_of(value, here.right, counter)
     end
-  end                                             # => :depth_of
+  end
 
   def maximum(here = @head)
     if @head == NullNode::DEFAULT
@@ -64,7 +64,7 @@ class BST
         maximum(here.right)
       end
     end
-  end                                     # => :maximum
+  end
 
   def minimum(here = @head)
     if @head == NullNode::DEFAULT
@@ -76,83 +76,91 @@ class BST
         minimum(here.left)
       end
     end
-  end                                    # => :minimum
+  end
 
-  def sort(here = @head, mother = @head, sorted_array = @sorted_array)
-    if here == NullNode::DEFAULT                                        # => false, false, false, true, true, false, true, true, false, false, true, true, true
+  def sort(here = @head, sorted_array = @sorted_array)
+    if here == NullNode::DEFAULT
       return
     else
-      sort(here.left, here)                                             # => nil, ["a"], nil, ["a", "b", "c"], nil, ["a", "b", "c", "d", "e"]
-      sorted_array << here.data                                         # => ["a"], ["a", "b"], ["a", "b", "c"], ["a", "b", "c", "d"], ["a", "b", "c", "d", "e"], ["a", "b", "c", "d", "e", "f"]
-      sort(here.right, here)                                            # => nil, nil, ["a", "b", "c"], nil, nil, ["a", "b", "c", "d", "e", "f"]
+      sort(here.left)
+      sorted_array << here.data
+      sort(here.right)
     end
-    sorted_array                                                        # => ["a"], ["a", "b", "c"], ["a", "b", "c"], ["a", "b", "c", "d", "e"], ["a", "b", "c", "d", "e", "f"], ["a", "b", "c", "d", "e", "f"]
-  end                                                                   # => :sort
+    sorted_array
+  end
 
   def delete(value, here = @head, mother = @head)
-    children = "None"                                # => "None", "None", "None"
-    if here == NullNode::DEFAULT                     # => false, false, false
+    if here == NullNode::DEFAULT || !include?(value)
+      puts "Can't delete #{value} because it is not in the tree."
       return
     else
-      if here.data < value                           # => true, true, false
-        delete(value, here.right, here)              # => #<Node:0x007fef9a073c08 @data="g", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a081da8 @data="f", @left=#<Node:0x007fef9a07bb60 @data="e", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>
-      elsif here.data > value                        # => false
+      if here.data < value
+        delete(value, here.right, here)
+      elsif here.data > value
         delete(value, here.left, here)
-      else here.data == value                        # => true
-        children = number_of_children(here, mother)  # => "None"
-        case children                                # => "None"
-        when "Both"
-          subtree_max = maximum(here.left)
-          here.data = subtree_max
-          delete(subtree_max, here.left, here)
-        when "Left"
-          replace(here.left, mother)
-        when "Right"
-          replace(here.right, mother)
-        else # "None"
-          if here.data <= mother.data                # => false
-            mother.left = NullNode::DEFAULT
-          else
-            mother.right = NullNode::DEFAULT         # => #<NullNode:0x007fef9a09b708>
-          end                                        # => #<NullNode:0x007fef9a09b708>
-        end                                          # => #<NullNode:0x007fef9a09b708>
-      end                                            # => #<NullNode:0x007fef9a09b708>, #<Node:0x007fef9a073c08 @data="g", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a081da8 @data="f", @left=#<Node:0x007fef9a07bb60 @data="e", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>
+      else
+        children = number_of_children(here)
+        case children
+        when 'Both'
+          two_child_replace(here)
+        when 'Left'
+          one_child_replace(here.left, mother)
+        when 'Right'
+          one_child_replace(here.right, mother)
+        else
+          no_children_replace(here, mother)
+        end
+      end
     end
-    here                                             # => #<Node:0x007fef9a073c08 @data="g", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a081da8 @data="f", @left=#<Node:0x007fef9a07bb60 @data="e", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>, #<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<Node:0x007fef9a088ec8 @data="c", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>>, @right=#<Node:0x007fef9a081da8 @data="f", @left=#<Node:0x007fef9a07bb60 @data="e", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>>
-  end                                                # => :delete
+    #here.data                                                      # => "g", "f", "d"
+  end
 
-  def number_of_children(here, mother)
-    if here.left != NullNode::DEFAULT && here.right != NullNode::DEFAULT  # => false
-      children = "Both"
-    elsif here.left != NullNode::DEFAULT                                  # => false
-      children = "Left"
-    elsif here.right != NullNode::DEFAULT                                 # => false
-      children = "Right"
+  def number_of_children(here)
+    if here.left != NullNode::DEFAULT && here.right != NullNode::DEFAULT
+      'Both'
+    elsif here.left != NullNode::DEFAULT
+      'Left'
+    elsif here.right != NullNode::DEFAULT
+      'Right'
     else
-      children = "None"                                                   # => "None"
-    end                                                                   # => "None"
-  end                                                                     # => :number_of_children
+      'None'
+    end
+  end
 
-  def replace(here, mother)
+  def one_child_replace(here, mother)
     if here.data < mother.data
       mother.left = here
     else
       mother.right = here
     end
-  end                           # => :replace
+  end
 
-  def number_of_leaves(here = @head, mother = @head, leaves = @leaves)
+  def no_children_replace(here, mother)
+    if here.data <= mother.data
+      mother.left = NullNode::DEFAULT
+    else
+      mother.right = NullNode::DEFAULT
+    end
+  end
+
+  def two_child_replace(here)
+    subtree_max = maximum(here.left)
+    here.data = subtree_max
+    delete(subtree_max, here.left, here)
+  end
+
+  def number_of_leaves(here = @head, leaves = @leaves)
     if here == NullNode::DEFAULT
       return 0
     else
       if here.left == NullNode::DEFAULT && here.right == NullNode::DEFAULT
         leaves << here.data
       end
-      number_of_leaves(here.left, here, leaves)
-      number_of_leaves(here.right, here, leaves)
+      number_of_leaves(here.left, leaves)
+      number_of_leaves(here.right, leaves)
     end
     leaves.count
-  end                                                                       # => :number_of_leaves
+  end
 
   def height
     nodes = sort
@@ -165,27 +173,21 @@ class BST
       end
       depths.sort.pop
     end
-  end                              # => :height
+  end
 
   def create_tree
-    handle = File.open("/Users/shannonpaige/code/binary-search-trees/tree_nodes.txt")  # => #<File:/Users/shannonpaige/code/binary-search-trees/tree_nodes.txt>
-    handle.each_line do |line|                                                         # => #<File:/Users/shannonpaige/code/binary-search-trees/tree_nodes.txt>
-      insert("#{line.chomp}")                                                          # => #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @sorted_array=[], @leaves=[]>, #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>, @sorted_array=[], @leaves=[]>, #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>, @sorted_array=[], @leaves=[]>, #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNod...
-    end                                                                                # => #<File:/Users/shannonpaige/code/binary-search-trees/tree_nodes.txt>
-  end                                                                                  # => :create_tree
+    handle = File.open('/Users/shannonpaige/code/binary-search-trees/tree_nodes.txt')
+    handle.each_line do |line|
+      insert("#{line.chomp}")
+    end
+  end
 
   def output_tree
-    handle = File.open("/Users/shannonpaige/code/binary-search-trees/tree_output.txt", "w")
+    handle = File.open('/Users/shannonpaige/code/binary-search-trees/tree_output.txt', 'w')
     output = sort
     output.each do |node|
       handle.write("#{node}\n")
     end
     handle.flush
-  end                                                                                        # => :output_tree
-end                                                                                          # => :output_tree
-
-tree = BST.new    # => #<BST:0x007fef9a098f08 @head=#<NullNode:0x007fef9a09b708>, @sorted_array=[], @leaves=[]>
-tree.create_tree  # => #<File:/Users/shannonpaige/code/binary-search-trees/tree_nodes.txt>
-tree.delete("g")  # => #<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<Node:0x007fef9a088ec8 @data="c", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>>, @right=#<Node:0x007fef9a081da8 @data="f", @left=#<Node:0x007fef9a07bb60 @data="e", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>>
-tree.sort         # => ["a", "b", "c", "d", "e", "f"]
-tree              # => #<BST:0x007fef9a098f08 @head=#<Node:0x007fef9a098530 @data="d", @left=#<Node:0x007fef9a093530 @data="b", @left=#<Node:0x007fef9a0914b0 @data="a", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<Node:0x007fef9a088ec8 @data="c", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>>, @right=#<Node:0x007fef9a081da8 @data="f", @left=#<Node:0x007fef9a07bb60 @data="e", @left=#<NullNode:0x007fef9a09b708>, @right=#<NullNode:0x007fef9a09b708>>, @right=#<NullNode:0x007fef9a09b708>>>, @sorted_array=["a", "b", "c", "d", "e", "f"], @leaves=[]>
+  end
+end
