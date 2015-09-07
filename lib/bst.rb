@@ -1,13 +1,14 @@
-require_relative "node"       # => true
-require_relative "null_node"  # => false
+require_relative "node"
+require_relative "null_node"
 
 class BST
-  attr_accessor :head, :array  # => nil
+  attr_accessor :head, :array
 
   def initialize(head = NullNode::DEFAULT)
-    @head = head                            # => #<NullNode:0x007ff52c0e2e68>
-    @sorted_array = []                      # => []
-  end                                       # => :initialize
+    @head = head
+    @sorted_array = []
+    @leaves = []
+  end
 
   def insert(node_value, here = @head)
     if @head == NullNode::DEFAULT
@@ -27,7 +28,7 @@ class BST
       end
     end
     self
-  end                                                                     # => :insert
+  end
 
   def include?(value, here = @head)
     if here == NullNode::DEFAULT
@@ -41,7 +42,7 @@ class BST
       here = here.left
       include?(value, here)
     end
-  end                                # => :include?
+  end
 
   def depth_of(value, here = @head, counter = 0)
     if @head == NullNode::DEFAULT
@@ -57,7 +58,7 @@ class BST
       counter += 1
       depth_of(value, here, counter)
     end
-  end                                             # => :depth_of
+  end
 
   def maximum(here = @head)
     if @head == NullNode::DEFAULT
@@ -70,7 +71,7 @@ class BST
         maximum(here)
       end
     end
-  end                                     # => :maximum
+  end
 
   def minimum(here = @head)
     if @head == NullNode::DEFAULT
@@ -83,7 +84,7 @@ class BST
         minimum(here)
       end
     end
-  end                                    # => :minimum
+  end
 
   # def sort(here = @head, sorted_array = @sorted_array)
   #   if here == NullNode::DEFAULT                        # => false, false, false, true, true, true, false, true
@@ -106,7 +107,7 @@ class BST
 
 
   def sort(here = @head, mother = @head, sorted_array = @sorted_array)
-    if here == NullNode::DEFAULT                                        # => true
+    if here == NullNode::DEFAULT
       return
     else
       sort(here.left, here)
@@ -114,7 +115,7 @@ class BST
       sort(here.right, here)
     end
     sorted_array
-  end                                                                   # => :sort
+  end
 
   # def delete(value, here = @head, mother = @head)
   #   # As the final challenge, add the ability to delete a value from the tree and repair the tree.
@@ -143,19 +144,25 @@ class BST
   #   self
   # end                                              # => :delete
 
-  def number_of_leaves
-    # find the total number of leaves on the tree
-    # Make counter to count a leaf
-    # go through every node on the tree
-    # when left and right are null, add to counter
-  end                   # => :number_of_leaves
+  def number_of_leaves(here = @head, mother = @head, leaves = @leaves)
+    if here == NullNode::DEFAULT
+      return 0
+    else
+      if here.left == NullNode::DEFAULT && here.right == NullNode::DEFAULT
+        leaves << here.data
+      end
+      number_of_leaves(here.left, here, leaves)
+      number_of_leaves(here.right, here, leaves)
+    end
+    leaves.count
+  end
 
   def height
-    nodes = sort                   # => nil
-    depths = []                    # => []
-    nodes                          # => nil
-    if nodes.nil?                  # => true
-      return -1                     # => 0
+    nodes = sort
+    depths = []
+    nodes
+    if nodes.nil?
+      return -1
     else
       nodes.each do |value|
         value
@@ -164,18 +171,18 @@ class BST
       end
       depths.sort.pop
     end
-  end                              # => :height
-end                                # => :height
+  end
+end
 
-tree = BST.new  # => #<BST:0x007ff52c0e0898 @head=#<NullNode:0x007ff52c0e2e68>, @sorted_array=[]>
-# tree.insert("d")
-# tree.insert("b")
-# tree.insert("a")
-# tree.insert("c")
-# tree.insert("f")
-# tree.insert("e")
-# tree.insert("g")
-# tree.insert("ab")
+tree = BST.new
+tree.insert("d")
+tree.insert("b")
+#tree.insert("a")  # => #<BST:0x007fdc71097428 @head=#<Node:0x007fdc71096a50 @data="d", @left=#<Node:0x007fdc71095128 @data="b", @left=#<Node:0x007fdc7108efa8 @data="a", @left=#<NullNode:0x007fdc7109d418>, @right=#<NullNode:0x007fdc7109d418>>, @right=#<NullNode:0x007fdc7109d418>>, @right=#<NullNode:0x007fdc7109d418>>, @sorted_array=[], @leaves=[]>
+#tree.insert("c")  # => #<BST:0x007fdc71097428 @head=#<Node:0x007fdc71096a50 @data="d", @left=#<Node:0x007fdc71095128 @data="b", @left=#<Node:0x007fdc7108efa8 @data="a", @left=#<NullNode:0x007fdc7109d418>, @right=#<NullNode:0x007fdc7109d418>>, @right=#<Node:0x007fdc71087c30 @data="c", @left=#<NullNode:0x007fdc7109d418>, @right=#<NullNode:0x007fdc7109d418>>>, @right=#<NullNode:0x007fdc7109d418>>, @sorted_array=[], @leaves=[]>
+tree.insert("f")
+tree.insert("e")
+tree.insert("g")
+#tree.insert("ab")  # => #<BST:0x007f834a93c7e8 @head=#<Node:0x007f834a937ce8 @data="d", @left=#<Node:0x007f834a9368c0 @data="b", @left=#<Node:0x007f834a9346d8 @data="a", @left=#<NullNode:0x007f834a93f0b0>, @right=#<Node:0x007f834b875430 @data="ab", @left=#<NullNode:0x007f834a93f0b0>, @right=#<NullNode:0x007f834a93f0b0>>>, @right=#<Node:0x007f834a92d338 @data="c", @left=#<NullNode:0x007f834a93f0b0>, @right=#<NullNode:0x007f834a93f0b0>>>, @right=#<Node:0x007f834a02e390 @data="f", @left=#<Node:0x007f834b02fd70 @data="e", @left=#<NullNode:0x007f834a93f0b0>, @right=#<NullNode:0x007f834a93f0b0>>, @right=#<Node:0x007f834b87e990 @data="g", @left=#<NullNode:0x007f834a93f0b0>, @right=#<NullNode:0x007f834a93f0b0>>>>, @sorted_array=[], @leaves=[]>
 
-tree         # => #<BST:0x007ff52c0e0898 @head=#<NullNode:0x007ff52c0e2e68>, @sorted_array=[]>
-tree.height  # => 0
+tree
+tree.number_of_leaves

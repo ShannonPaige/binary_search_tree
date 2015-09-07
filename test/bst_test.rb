@@ -82,6 +82,22 @@ class BSTTest < MiniTest::Test
     assert_equal ["a", "b", "c", "d", "e", "f", "g"], @new_list.sort
   end
 
+  def test_returns_0_number_of_leaves_on_an_empty_tree
+    assert_equal 0, @new_list.number_of_leaves
+  end
+
+  def test_returns_number_of_leaves_on_an_tree
+    @new_list.insert("d")
+    assert_equal 1, @new_list.number_of_leaves
+  end
+
+  def test_returns_number_of_leaves_on_an_tree
+    @new_list.insert("d")
+    @new_list.insert("b")
+    @new_list.insert("f")
+    assert_equal 2, @new_list.number_of_leaves
+  end
+
   def test_return_height_of_tree_as_negative_one_if_empty
     assert_equal -1, @new_list.height
   end
