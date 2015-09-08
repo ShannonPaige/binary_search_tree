@@ -6,25 +6,11 @@ class BST
 
   def initialize(head = NullNode::DEFAULT)
     @head = head
-    @sorted_array = []
     @leaves = []
   end
 
-  def insert(node_value, here = @head)
-    if @head == NullNode::DEFAULT
-      @head = Node.new(node_value)
-    else
-      new_node = Node.new(node_value)
-      if new_node.data < here.data && here.left == NullNode::DEFAULT
-        here.left = new_node
-      elsif new_node.data > here.data && here.right == NullNode::DEFAULT
-        here.right = new_node
-      elsif new_node.data < here.data
-        insert(node_value, here.left)
-      else
-        insert(node_value, here.right)
-      end
-    end
+  def insert(node_value)
+    self.head = head.insert(node_value)
     self
   end
 
@@ -78,13 +64,13 @@ class BST
     end
   end
 
-  def sort(here = @head, sorted_array = @sorted_array)
+  def sort(here = @head, sorted_array = [])
     if here == NullNode::DEFAULT
       return
     else
-      sort(here.left)
+      sort(here.left, sorted_array)
       sorted_array << here.data
-      sort(here.right)
+      sort(here.right, sorted_array)
     end
     sorted_array
   end
